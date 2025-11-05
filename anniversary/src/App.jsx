@@ -1,5 +1,5 @@
 import WelcomeText from "./components/SplitText";
-import CircularText from "./components/CIrcularText";
+import CircularText from "./components/CircularText";
 import FloatingHearts from "./components/FloatingHearts";
 import Timeline from "./components/Timeline";
 import Stack from "./components/Stack";

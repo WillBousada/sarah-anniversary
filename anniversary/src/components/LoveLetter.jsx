@@ -56,18 +56,60 @@ export default function LoveLetter() {
                         My Dearest Sarah,
                     </h2>
 
-                    <div className="text-2xl leading-relaxed space-y-4 italic">
-                        <p></p>
+                    <div
+                        className="text-lg leading-relaxed space-y-4 italic"
+                        style={{ fontFamily: "'Great Vibes', cursive" }}
+                    >
+                        <p>
+                            From that first night when our eyes met across the
+                            room, I knew something magical had begun. You walked
+                            into my life like the first snowfall of winter.
+                        </p>
 
-                        <p></p>
+                        <p>
+                            Our first Christmas together, wrapped in warmth and
+                            wonder. Then Montreal on New Year's, under the club
+                            lights, three words escaped my lips that had been
+                            building in my heart for months: I love you.
+                        </p>
 
-                        <p></p>
+                        <p>
+                            The spa days at Nordik, where time stood still in
+                            the steam and serenity. Summer hikes where we chased
+                            sunsets and made promises. Your lake house, where I
+                            learned what home truly means - it's not a place,
+                            it's you. Even our silly Timmies wrap addiction at
+                            Carleton became sacred to me, because they were
+                            ours.
+                        </p>
 
-                        <p></p>
+                        <p>
+                            Thanksgiving with family, Montreal's autumn colors,
+                            every inside joke (especially you my little bumble
+                            bee 🐝), every "lovvvvverrrruuuuuuuuuu" texted in
+                            the dark - they're all threads in the tapestry we're
+                            weaving together.
+                        </p>
 
-                        <p className="text-center mt-8">Happy Anniversary ❤️</p>
+                        <p>
+                            365 days. 365 reasons to smile. 365 moments of
+                            choosing you, and you choosing me. Thank you for
+                            being my adventure, my comfort, my laughter, and my
+                            home.
+                        </p>
 
-                        <p className="text-right text-3xl mt-8">
+                        <p
+                            className="text-center mt-8"
+                            style={{ fontFamily: "Brush Script MT, cursive" }}
+                        >
+                            Here's to forever more adventures, my beautiful
+                            Sarah ❤️
+                        </p>
+
+                        <p
+                            className="text-right text-3xl mt-8"
+                            style={{ fontFamily: "Brush Script MT, cursive" }}
+                        >
                             Forever yours,
                             <br />
                             <span className="text-pink-600 font-bold">

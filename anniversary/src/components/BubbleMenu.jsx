@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { gsap } from "gsap";
 
 const DEFAULT_ITEMS = [
@@ -55,6 +56,7 @@ export default function BubbleMenu({
 }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [showOverlay, setShowOverlay] = useState(false);
+    const navigate = useNavigate();
 
     const overlayRef = useRef(null);
     const bubblesRef = useRef([]);
@@ -66,16 +68,26 @@ export default function BubbleMenu({
         e.preventDefault();
         setIsMenuOpen(false);
 
-        // Smooth scroll to section
-        setTimeout(() => {
-            const element = document.querySelector(href);
-            if (element) {
-                element.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start",
-                });
-            }
-        }, 300); // Wait for menu close animation
+        if (href.startsWith("/")) {
+            // Route link — navigate after menu close animation
+            setTimeout(() => {
+                navigate(href);
+            }, 300);
+        } else if (href.startsWith("#")) {
+            // Anchor on the current page — smooth scroll
+            setTimeout(() => {
+                const element = document.querySelector(href);
+                if (element) {
+                    element.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start",
+                    });
+                } else {
+                    // Section not on this page — go home then scroll
+                    navigate("/" + href);
+                }
+            }, 300);
+        }
     };
 
     const containerClassName = [

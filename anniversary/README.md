@@ -1,16 +1,30 @@
-# React + Vite
+# Sarah Anniversary
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React + Vite anniversary website with animations powered by GSAP and Tailwind CSS.
 
-Currently, two official plugins are available:
+## Getting Started
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```bash
+# Install dependencies
+npm install
 
-## React Compiler
+# Start the dev server
+npm run dev
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Available Scripts
 
-## Expanding the ESLint configuration
+| Command             | Description                        |
+| ------------------- | ---------------------------------- |
+| `npm run dev`       | Start the Vite dev server with HMR |
+| `npm run build`     | Build for production               |
+| `npm run preview`   | Preview the production build       |
+| `npm run lint`      | Run ESLint                         |
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Tech Stack
+
+- **React 19** — UI framework
+- **Vite** — Build tool and dev server
+- **GSAP** — Animations
+- **Tailwind CSS 4** — Styling
+- **Framer Motion** — Additional animations

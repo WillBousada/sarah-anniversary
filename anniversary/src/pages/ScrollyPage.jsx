@@ -8,6 +8,7 @@ import DancerScroll from "../components/scrolly/DancerScroll";
 import SpaScroll from "../components/scrolly/SpaScroll";
 import MemoryBookSection from "../components/scrolly/MemoryBookSection";
 import MemoryCaption from "../components/scrolly/MemoryCaption";
+import MontrealScroll from "../components/scrolly/MontrealScroll";
 import SillySection from "../components/scrolly/SillySection";
 import ClosingSection from "../components/scrolly/ClosingSection";
 
@@ -102,15 +103,21 @@ export default function ScrollyPage() {
                 <MemoryCaption
                     eyebrow="Formal"
                     heading={<>You always take my <em>breath away</em></>}
-                    body="Getting all dressed up with you is one of my favourite things. You walk in and I forget what I was going to say."
+                    body="Getting all dressed up with you is one of my favourite things. No words could describe how beautiful you are."
                 />
                 <DancerScroll />
                 <MemoryCaption
                     eyebrow="Koena, Québec"
-                    heading="Our little Quebec adventure"
-                    body="The spa, the cobblestone streets, the food, the cold — I loved every second of that trip because I got to share it with you."
+                    heading="Our New Years, Québec adventure"
+                    body="The spa, the food, the cold — I loved every second of that trip because I got to share it with you."
                 />
                 <SpaScroll />
+                <MemoryCaption
+                    eyebrow="Montréal"
+                    heading="Our Montreal trip"
+                    body="Running around Montreal with you was one of the best times. Every street, every bite of food, every moment — I want to go back and do it all again."
+                />
+                <MontrealScroll />
                 <SillySection />
                 <MemoryBookSection />
                 <ClosingSection />

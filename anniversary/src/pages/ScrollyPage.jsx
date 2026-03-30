@@ -7,7 +7,7 @@ import LakeScroll from "../components/scrolly/LakeScroll";
 import DancerScroll from "../components/scrolly/DancerScroll";
 import SpaScroll from "../components/scrolly/SpaScroll";
 import MemoryBookSection from "../components/scrolly/MemoryBookSection";
-import RevealSection from "../components/scrolly/RevealSection";
+import SillySection from "../components/scrolly/SillySection";
 import ClosingSection from "../components/scrolly/ClosingSection";
 
 function ScrollProgress() {
@@ -23,7 +23,8 @@ function ScrollProgress() {
                 left: 0,
                 right: 0,
                 height: "3px",
-                background: "linear-gradient(to right, #f9a8d4, #ec4899, #db2777)",
+                background:
+                    "linear-gradient(to right, #f9a8d4, #ec4899, #db2777)",
                 transformOrigin: "left",
                 zIndex: 100,
             }}
@@ -95,7 +96,7 @@ export default function ScrollyPage() {
                 <DancerScroll />
                 <SpaScroll />
                 <MemoryBookSection />
-                <RevealSection />
+                <SillySection />
                 <ClosingSection />
             </div>
 

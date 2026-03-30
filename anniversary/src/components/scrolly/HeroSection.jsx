@@ -18,12 +18,9 @@ export default function HeroSection() {
             className="relative h-screen overflow-hidden flex items-end justify-start"
         >
             {/* Parallax image */}
-            <motion.div
-                className="absolute inset-0"
-                style={{ scale, y }}
-            >
+            <motion.div className="absolute inset-0" style={{ scale, y }}>
                 <img
-                    src="/assets/IMG_1099.jpg"
+                    src="/assets/hero.png"
                     alt="Formal night"
                     className="vintage-img w-full h-full object-cover"
                 />
@@ -40,14 +37,14 @@ export default function HeroSection() {
                     className="text-white/60 text-sm tracking-[0.3em] uppercase mb-3"
                     style={{ fontFamily: "'Georgia', serif" }}
                 >
-                    Our Story
+                    Our Moments
                 </p>
                 <h1
                     className="text-5xl md:text-7xl font-light text-white leading-tight"
                     style={{ fontFamily: "'Georgia', serif" }}
                 >
-                    Sarah &<br />
-                    <em>Will</em>
+                    Happy Birthday<br />
+                    <em>Sarah</em>
                 </h1>
             </motion.div>
 
@@ -56,9 +53,16 @@ export default function HeroSection() {
                 className="absolute bottom-8 right-8 z-10 flex flex-col items-center gap-2"
                 style={{ opacity }}
                 animate={{ y: [0, 10, 0] }}
-                transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+                transition={{
+                    repeat: Infinity,
+                    duration: 2,
+                    ease: "easeInOut",
+                }}
             >
-                <span className="text-white/50 text-xs tracking-widest uppercase" style={{ fontFamily: "sans-serif" }}>
+                <span
+                    className="text-white/50 text-xs tracking-widest uppercase"
+                    style={{ fontFamily: "sans-serif" }}
+                >
                     Scroll
                 </span>
                 <div className="w-px h-12 bg-white/30" />

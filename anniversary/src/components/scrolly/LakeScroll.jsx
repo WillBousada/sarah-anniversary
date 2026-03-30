@@ -43,7 +43,7 @@ export default function LakeScroll() {
                     className="text-stone-400 text-xs tracking-[0.4em] uppercase"
                     style={{ fontFamily: "'Georgia', serif" }}
                 >
-                    The Great Outdoors
+                    White Lake
                 </p>
 
                 <motion.div
@@ -74,7 +74,8 @@ export default function LakeScroll() {
                                 style={{
                                     width: spriteSize,
                                     height: spriteSize,
-                                    backgroundImage: "url('/assets/lake-sprite.png')",
+                                    backgroundImage:
+                                        "url('/assets/lake-sprite.png')",
                                     backgroundSize: "300% 200%",
                                     backgroundPosition: FRAMES[frame],
                                     backgroundRepeat: "no-repeat",

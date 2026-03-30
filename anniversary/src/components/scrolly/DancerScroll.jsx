@@ -45,7 +45,7 @@ export default function DancerScroll() {
                     className="text-stone-400 text-xs tracking-[0.4em] uppercase"
                     style={{ fontFamily: "'Georgia', serif" }}
                 >
-                    Energy &amp; Movement
+                    Dancing with you
                 </p>
 
                 <motion.div

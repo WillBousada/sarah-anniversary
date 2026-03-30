@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useScroll, useSpring, motion } from "framer-motion";
 import SmoothScroll from "../components/scrolly/SmoothScroll";
 import HeroSection from "../components/scrolly/HeroSection";
 import IntroSection from "../components/scrolly/IntroSection";
@@ -8,6 +9,27 @@ import SpaScroll from "../components/scrolly/SpaScroll";
 import MemoryBookSection from "../components/scrolly/MemoryBookSection";
 import RevealSection from "../components/scrolly/RevealSection";
 import ClosingSection from "../components/scrolly/ClosingSection";
+
+function ScrollProgress() {
+    const { scrollYProgress } = useScroll();
+    const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 30 });
+
+    return (
+        <motion.div
+            style={{
+                scaleX,
+                position: "fixed",
+                top: 0,
+                left: 0,
+                right: 0,
+                height: "3px",
+                background: "linear-gradient(to right, #f9a8d4, #ec4899, #db2777)",
+                transformOrigin: "left",
+                zIndex: 100,
+            }}
+        />
+    );
+}
 
 function BackToTop() {
     const [visible, setVisible] = useState(false);
@@ -62,6 +84,7 @@ function BackToTop() {
 export default function ScrollyPage() {
     return (
         <SmoothScroll>
+            <ScrollProgress />
             {/* Film grain overlay — fixed, only on this page */}
             <div className="grain-overlay" />
 

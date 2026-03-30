@@ -71,7 +71,7 @@ export default function MontrealScroll() {
                                     backgroundPosition: FRAMES[frame],
                                     backgroundRepeat: "no-repeat",
                                     imageRendering: "pixelated",
-                                    transform: "scale(1.45)",
+                                    transform: "scale(1.18)",
                                     transformOrigin: "bottom center",
                                 }}
                             />

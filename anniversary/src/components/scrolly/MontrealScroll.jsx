@@ -60,19 +60,22 @@ export default function MontrealScroll() {
                             lineHeight: 0,
                         }}
                     >
-                        {/* Sprite frame */}
-                        <div
-                            style={{
-                                width: frameW,
-                                height: frameH,
-                                backgroundImage: "url('/assets/montreal-sprite.png')",
-                                backgroundSize: "200% 300%",
-                                backgroundPosition: FRAMES[frame],
-                                backgroundRepeat: "no-repeat",
-                                imageRendering: "pixelated",
-                                display: "block",
-                            }}
-                        />
+                        {/* Sprite frame — clipped to bottom, top label cropped out */}
+                        <div style={{ width: frameW, height: frameH, overflow: "hidden", position: "relative" }}>
+                            <div
+                                style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    backgroundImage: "url('/assets/montreal-sprite.png')",
+                                    backgroundSize: "200% 300%",
+                                    backgroundPosition: FRAMES[frame],
+                                    backgroundRepeat: "no-repeat",
+                                    imageRendering: "pixelated",
+                                    transform: "scale(1.45)",
+                                    transformOrigin: "bottom center",
+                                }}
+                            />
+                        </div>
 
                         {/* Caption bar */}
                         <div

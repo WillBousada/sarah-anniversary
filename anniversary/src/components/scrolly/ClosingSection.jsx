@@ -36,32 +36,31 @@ export default function ClosingSection() {
         offset: ["start end", "end end"],
     });
 
-    const opacity = useTransform(scrollYProgress, [0, 0.25], [0, 1]);
-    const globeScale = useTransform(scrollYProgress, [0, 0.3], [0.6, 1]);
-    const textY = useTransform(scrollYProgress, [0.3, 0.65], ["30px", "0px"]);
-    const textOpacity = useTransform(scrollYProgress, [0.3, 0.65], [0, 1]);
-    const bdayY = useTransform(scrollYProgress, [0.55, 0.9], ["30px", "0px"]);
-    const bdayOpacity = useTransform(scrollYProgress, [0.55, 0.9], [0, 1]);
+    const opacity = useTransform(scrollYProgress, [0, 0.15], [0, 1]);
+    const globeScale = useTransform(scrollYProgress, [0, 0.2], [0.6, 1]);
+    const textY = useTransform(scrollYProgress, [0.15, 0.4], ["24px", "0px"]);
+    const textOpacity = useTransform(scrollYProgress, [0.15, 0.4], [0, 1]);
+    const bdayY = useTransform(scrollYProgress, [0.35, 0.6], ["24px", "0px"]);
+    const bdayOpacity = useTransform(scrollYProgress, [0.35, 0.6], [0, 1]);
 
     return (
         <section
             ref={ref}
             className="relative flex items-center justify-center overflow-hidden"
             style={{
-                minHeight: "100vh",
                 background:
-                    "linear-gradient(to bottom, #FDFCF0 0%, #f0ece0 60%, #e8e0d0 100%)",
+                    "linear-gradient(to bottom, #FDFCF0 0%, #ede8da 100%)",
+                padding: "8vh 0 10vh",
             }}
         >
             <motion.div
                 style={{ opacity }}
-                className="flex flex-col items-center gap-12 px-8 py-20 text-center max-w-2xl"
+                className="flex flex-col items-center gap-10 px-8 py-16 text-center max-w-2xl"
             >
                 {/* Globe with orbiting icons */}
                 <motion.div
                     style={{ scale: globeScale, position: "relative", width: 120, height: 120 }}
                 >
-                    {/* Globe */}
                     <motion.div
                         animate={{ rotateY: 360 }}
                         transition={{ repeat: Infinity, duration: 12, ease: "linear" }}
@@ -82,8 +81,6 @@ export default function ClosingSection() {
                     >
                         🌍
                     </motion.div>
-
-                    {/* Orbiting icons */}
                     <OrbitDot angle={0}   radius={72} emoji="✈️"  duration={9}  delay={0} />
                     <OrbitDot angle={120} radius={72} emoji="❤️"  duration={9}  delay={0} />
                     <OrbitDot angle={240} radius={72} emoji="⭐"  duration={9}  delay={0} />
@@ -95,14 +92,12 @@ export default function ClosingSection() {
                     className="flex flex-col gap-4"
                 >
                     <p
-                        className="text-stone-400 text-xs tracking-[0.4em] uppercase"
-                        style={{ fontFamily: "'Georgia', serif" }}
+                        style={{ fontFamily: "'Georgia', serif", color: "#78716c", fontSize: "0.7rem", letterSpacing: "0.4em", textTransform: "uppercase" }}
                     >
                         more memories to come
                     </p>
                     <p
-                        className="text-stone-600 text-lg md:text-xl leading-relaxed"
-                        style={{ fontFamily: "'Georgia', serif" }}
+                        style={{ fontFamily: "'Georgia', serif", color: "#292524", fontSize: "1.15rem", lineHeight: 1.7 }}
                     >
                         I am so excited to keep making new memories with you,
                         going on new adventures, seeing new places, and
@@ -110,8 +105,7 @@ export default function ClosingSection() {
                         together.
                     </p>
                     <p
-                        className="text-stone-500 text-base md:text-lg leading-relaxed"
-                        style={{ fontFamily: "'Georgia', serif" }}
+                        style={{ fontFamily: "'Georgia', serif", color: "#44403c", fontSize: "1.05rem", lineHeight: 1.7 }}
                     >
                         Here's to every chapter still ahead of us.{" "}
                         <span style={{ fontSize: "1.1em" }}>&#10084;&#65039;</span>
@@ -121,24 +115,22 @@ export default function ClosingSection() {
                 {/* Big birthday sign-off */}
                 <motion.div
                     style={{ y: bdayY, opacity: bdayOpacity }}
-                    className="flex flex-col gap-3 pt-4 border-t border-stone-200 w-full"
+                    className="flex flex-col gap-3 pt-6 w-full"
+                    style={{ borderTop: "1px solid #d6d3d1", paddingTop: "1.5rem" }}
                 >
                     <p
-                        className="text-stone-400 text-xs tracking-[0.4em] uppercase"
-                        style={{ fontFamily: "sans-serif" }}
+                        style={{ fontFamily: "sans-serif", color: "#78716c", fontSize: "0.7rem", letterSpacing: "0.4em", textTransform: "uppercase" }}
                     >
                         with all my love
                     </p>
                     <h2
-                        className="text-4xl md:text-6xl font-light text-stone-800 leading-tight"
-                        style={{ fontFamily: "'Georgia', serif" }}
+                        style={{ fontFamily: "'Georgia', serif", color: "#1c1917", fontSize: "clamp(2rem, 6vw, 3.5rem)", fontWeight: 300, lineHeight: 1.25 }}
                     >
                         Happy 21st Birthday,
                         <br />
                         <em
                             style={{
-                                background:
-                                    "linear-gradient(135deg, #b06a2a, #d4a06a, #b06a2a)",
+                                background: "linear-gradient(135deg, #92400e, #c2732a, #92400e)",
                                 WebkitBackgroundClip: "text",
                                 WebkitTextFillColor: "transparent",
                                 backgroundClip: "text",
@@ -149,8 +141,7 @@ export default function ClosingSection() {
                         🎂
                     </h2>
                     <p
-                        className="text-stone-400 text-sm tracking-widest"
-                        style={{ fontFamily: "'Georgia', serif", fontStyle: "italic" }}
+                        style={{ fontFamily: "'Georgia', serif", color: "#57534e", fontSize: "0.95rem", letterSpacing: "0.1em", fontStyle: "italic" }}
                     >
                         — Will x
                     </p>

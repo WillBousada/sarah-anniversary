@@ -7,6 +7,7 @@ import LakeScroll from "../components/scrolly/LakeScroll";
 import DancerScroll from "../components/scrolly/DancerScroll";
 import SpaScroll from "../components/scrolly/SpaScroll";
 import MemoryBookSection from "../components/scrolly/MemoryBookSection";
+import MemoryCaption from "../components/scrolly/MemoryCaption";
 import SillySection from "../components/scrolly/SillySection";
 import ClosingSection from "../components/scrolly/ClosingSection";
 
@@ -92,11 +93,26 @@ export default function ScrollyPage() {
             <div style={{ backgroundColor: "#FDFCF0" }}>
                 <HeroSection />
                 <IntroSection />
+                <MemoryCaption
+                    eyebrow="White Lake"
+                    heading="Your family's cottage"
+                    body="White Lake has become one of my favourite places in the world. There's something about being there with you that just feels like home."
+                />
                 <LakeScroll />
+                <MemoryCaption
+                    eyebrow="the formal"
+                    heading={<>You always take my <em>breath away</em></>}
+                    body="Getting all dressed up with you is one of my favourite things. You walk in and I forget what I was going to say."
+                />
                 <DancerScroll />
+                <MemoryCaption
+                    eyebrow="Koena, Québec"
+                    heading="Our little Quebec adventure"
+                    body="The spa, the cobblestone streets, the food, the cold — I loved every second of that trip because I got to share it with you."
+                />
                 <SpaScroll />
-                <MemoryBookSection />
                 <SillySection />
+                <MemoryBookSection />
                 <ClosingSection />
             </div>
 

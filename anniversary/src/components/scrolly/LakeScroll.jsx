@@ -55,7 +55,7 @@ export default function LakeScroll() {
                         style={{
                             border: `${frameBorder} solid ${frameColor}`,
                             borderRadius: "4px",
-                            // Layered box-shadows simulate a real window frame profile:
+                            // Layered inset shadows simulate a real window frame profile:
                             // outer wall shadow → outer frame edge → frame bevel → glass reveal
                             boxShadow:
                                 "0 24px 56px rgba(0,0,0,0.35), " +

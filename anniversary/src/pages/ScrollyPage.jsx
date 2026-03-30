@@ -9,6 +9,7 @@ import SpaScroll from "../components/scrolly/SpaScroll";
 import MemoryBookSection from "../components/scrolly/MemoryBookSection";
 import MemoryCaption from "../components/scrolly/MemoryCaption";
 import MontrealScroll from "../components/scrolly/MontrealScroll";
+import SmileSection from "../components/scrolly/SmileSection";
 import SillySection from "../components/scrolly/SillySection";
 import ClosingSection from "../components/scrolly/ClosingSection";
 
@@ -119,6 +120,7 @@ export default function ScrollyPage() {
                 />
                 <MontrealScroll />
                 <SillySection />
+                <SmileSection />
                 <MemoryBookSection />
                 <ClosingSection />
             </div>

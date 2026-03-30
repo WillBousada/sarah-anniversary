@@ -2,7 +2,7 @@ import SmoothScroll from "../components/scrolly/SmoothScroll";
 import HeroSection from "../components/scrolly/HeroSection";
 import OutdoorsSection from "../components/scrolly/OutdoorsSection";
 import DancerScroll from "../components/scrolly/DancerScroll";
-import SpaSection from "../components/scrolly/SpaSection";
+import SpaScroll from "../components/scrolly/SpaScroll";
 import MemoryBookSection from "../components/scrolly/MemoryBookSection";
 import RevealSection from "../components/scrolly/RevealSection";
 
@@ -16,7 +16,7 @@ export default function ScrollyPage() {
                 <HeroSection />
                 <OutdoorsSection />
                 <DancerScroll />
-                <SpaSection />
+                <SpaScroll />
                 <MemoryBookSection />
                 <RevealSection />
             </div>

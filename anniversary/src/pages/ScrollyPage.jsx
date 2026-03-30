@@ -37,27 +37,29 @@ function ScrollProgress() {
     );
 }
 
-const SCROLL_SPEED = 220;
+const SCROLL_SPEED = 180;
 
 function AutoScroll() {
     const [playing, setPlaying] = useState(false);
-    const rafRef = useRef(null);
+    const activeRef = useRef(false);
     const lastTsRef = useRef(null);
     const lenisRef = useLenis();
 
     const stop = useCallback(() => {
-        setPlaying(false);
-        if (rafRef.current) cancelAnimationFrame(rafRef.current);
-        rafRef.current = null;
+        activeRef.current = false;
         lastTsRef.current = null;
+        setPlaying(false);
         lenisRef?.current?.start();
     }, [lenisRef]);
 
     const start = useCallback(() => {
         lenisRef?.current?.stop();
+        activeRef.current = true;
+        lastTsRef.current = null;
         setPlaying(true);
 
         const tick = (ts) => {
+            if (!activeRef.current) return;
             if (lastTsRef.current !== null) {
                 const delta = ((ts - lastTsRef.current) / 1000) * SCROLL_SPEED;
                 window.scrollBy(0, delta);
@@ -67,9 +69,9 @@ function AutoScroll() {
                 }
             }
             lastTsRef.current = ts;
-            rafRef.current = requestAnimationFrame(tick);
+            requestAnimationFrame(tick);
         };
-        rafRef.current = requestAnimationFrame(tick);
+        requestAnimationFrame(tick);
     }, [lenisRef, stop]);
 
     // Pause on any manual scroll input

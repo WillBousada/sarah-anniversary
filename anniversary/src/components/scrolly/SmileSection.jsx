@@ -15,14 +15,14 @@ export default function SmileSection() {
     return (
         <section
             ref={ref}
-            className="relative h-screen overflow-hidden flex items-end justify-start"
+            className="relative h-screen overflow-hidden flex items-end justify-start bg-black"
             style={{ scrollSnapAlign: "start" }}
         >
             <motion.div className="absolute inset-0" style={{ scale, y }}>
                 <img
                     src="/assets/smile-sprite.png"
                     alt="Always smiling"
-                    className="vintage-img w-full h-full object-cover"
+                    className="vintage-img w-full h-full object-cover object-[center_20%]"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
             </motion.div>

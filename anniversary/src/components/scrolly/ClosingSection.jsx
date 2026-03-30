@@ -8,7 +8,11 @@ export default function ClosingSection() {
         offset: ["start end", "end start"],
     });
 
-    const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
+    const opacity = useTransform(
+        scrollYProgress,
+        [0, 0.2, 0.8, 1],
+        [0, 1, 1, 0],
+    );
     const y = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [40, 0, 0, -40]);
 
     return (
@@ -50,29 +54,6 @@ export default function ClosingSection() {
                     Here's to every chapter still ahead of us.{" "}
                     <span style={{ fontSize: "1.1em" }}>&#10084;&#65039;</span>
                 </p>
-
-                <div className="w-full border-t border-stone-200 pt-6 flex flex-col items-center gap-3">
-                    <p
-                        className="text-stone-400 text-xs tracking-[0.4em] uppercase"
-                        style={{ fontFamily: "sans-serif" }}
-                    >
-                        with all my love
-                    </p>
-                    <h2
-                        className="text-3xl md:text-5xl font-light text-stone-700 leading-tight"
-                        style={{ fontFamily: "'Georgia', serif" }}
-                    >
-                        Happy 21st Birthday,
-                        <br />
-                        <em>Sarah</em> 🎂
-                    </h2>
-                    <p
-                        className="text-stone-400 text-sm"
-                        style={{ fontFamily: "'Georgia', serif", fontStyle: "italic" }}
-                    >
-                        — Will x
-                    </p>
-                </div>
             </motion.div>
         </section>
     );

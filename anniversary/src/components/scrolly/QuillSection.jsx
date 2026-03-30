@@ -27,7 +27,7 @@ const LINES = [
         color: "#292524",
     },
     {
-        text: "— Will x",
+        text: "— Willy xo",
         size: "clamp(1.2rem, 3vw, 1.8rem)",
         weight: 400,
         delay: 7.8,

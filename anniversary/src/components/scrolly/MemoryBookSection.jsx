@@ -127,7 +127,7 @@ export default function MemoryBookSection() {
                         className="text-stone-400 text-xs tracking-[0.4em] uppercase"
                         style={{ fontFamily: "'Georgia', serif" }}
                     >
-                        Memory Book
+                        The Real Memories
                     </p>
 
                     {/* Book body */}

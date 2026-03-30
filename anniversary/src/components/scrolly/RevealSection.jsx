@@ -24,7 +24,7 @@ export default function RevealSection() {
                 style={{ scale, opacity }}
             >
                 <img
-                    src="/assets/IMG_2052.jpg"
+                    src="/assets/IMG_2052.jpeg"
                     alt="Holiday home"
                     className="vintage-img w-full h-full object-cover"
                 />

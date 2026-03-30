@@ -52,19 +52,38 @@ export default function DancerScroll() {
                     style={{ scale, opacity }}
                     className="flex items-center justify-center"
                 >
-                    {/* Sprite container */}
+                    {/* Picture frame — outer gold wood border */}
                     <div
                         style={{
-                            width: "320px",
-                            height: "320px",
-                            backgroundImage: "url('/assets/dancing-sprite.png')",
-                            backgroundSize: "300% 200%",
-                            backgroundPosition: FRAMES[frame],
-                            backgroundRepeat: "no-repeat",
-                            filter: "sepia(0.2) contrast(1.1)",
-                            imageRendering: "pixelated",
+                            padding: "14px",
+                            background: "linear-gradient(135deg, #6b4f1a 0%, #c9a227 30%, #8b6914 50%, #c9a227 70%, #6b4f1a 100%)",
+                            boxShadow: "0 20px 60px rgba(0,0,0,0.5), inset 0 0 12px rgba(0,0,0,0.35)",
+                            borderRadius: "2px",
                         }}
-                    />
+                    >
+                        {/* Matte */}
+                        <div
+                            style={{
+                                padding: "18px",
+                                background: "#f8f4ec",
+                                border: "1px solid #d4c4a8",
+                            }}
+                        >
+                            {/* Sprite container */}
+                            <div
+                                style={{
+                                    width: "clamp(260px, 55vmin, 480px)",
+                                    height: "clamp(260px, 55vmin, 480px)",
+                                    backgroundImage: "url('/assets/dancing-sprite.png')",
+                                    backgroundSize: "300% 200%",
+                                    backgroundPosition: FRAMES[frame],
+                                    backgroundRepeat: "no-repeat",
+                                    filter: "sepia(0.2) contrast(1.1)",
+                                    imageRendering: "pixelated",
+                                }}
+                            />
+                        </div>
+                    </div>
                 </motion.div>
             </div>
         </section>

@@ -37,13 +37,50 @@ function ScrollProgress() {
     );
 }
 
-// 220px per second — comfortable pace through all sections
-const SCROLL_SPEED = 220;
+const SPEEDS = { default: 220, text: 50, quill: 25 };
+
+// Compute speed zones and stop point lazily on first play
+function buildZones() {
+    const zones = [];
+    [
+        "zone-intro",
+        "zone-caption-1",
+        "zone-caption-2",
+        "zone-caption-3",
+        "zone-caption-4",
+        "zone-closing",
+    ].forEach((id) => {
+        const el = document.getElementById(id);
+        if (el)
+            zones.push({
+                top: el.offsetTop,
+                bottom: el.offsetTop + el.offsetHeight,
+                speed: SPEEDS.text,
+            });
+    });
+    const quill = document.getElementById("zone-quill");
+    if (quill)
+        zones.push({
+            top: quill.offsetTop,
+            bottom: quill.offsetTop + quill.offsetHeight,
+            speed: SPEEDS.quill,
+        });
+    return zones;
+}
+
+function speedAt(y, zones) {
+    for (const z of zones) {
+        if (y >= z.top && y < z.bottom) return z.speed;
+    }
+    return SPEEDS.default;
+}
 
 function AutoScroll() {
     const [playing, setPlaying] = useState(false);
     const rafRef = useRef(null);
     const lastTsRef = useRef(null);
+    const zonesRef = useRef(null);
+    const stopYRef = useRef(null);
     const lenisRef = useLenis();
 
     const stop = useCallback(() => {
@@ -55,14 +92,20 @@ function AutoScroll() {
     }, [lenisRef]);
 
     const start = useCallback(() => {
+        // Build zones fresh each play in case layout shifted
+        zonesRef.current = buildZones();
+        const stopEl = document.getElementById("zone-memory-book");
+        stopYRef.current = stopEl ? stopEl.offsetTop : Infinity;
+
         lenisRef?.current?.stop();
         setPlaying(true);
 
         const tick = (ts) => {
             if (lastTsRef.current !== null) {
-                const delta = ((ts - lastTsRef.current) / 1000) * SCROLL_SPEED;
-                window.scrollBy(0, delta);
-                if (window.scrollY + window.innerHeight >= document.body.scrollHeight - 5) {
+                const elapsed = ts - lastTsRef.current;
+                const speed = speedAt(window.scrollY, zonesRef.current);
+                window.scrollBy(0, (elapsed / 1000) * speed);
+                if (window.scrollY >= stopYRef.current) {
                     stop();
                     return;
                 }
@@ -75,7 +118,9 @@ function AutoScroll() {
 
     // Pause on any manual scroll input
     useEffect(() => {
-        const onInteract = () => { if (rafRef.current) stop(); };
+        const onInteract = () => {
+            if (rafRef.current) stop();
+        };
         window.addEventListener("wheel", onInteract, { passive: true });
         window.addEventListener("touchstart", onInteract, { passive: true });
         window.addEventListener("keydown", onInteract, { passive: true });
@@ -86,7 +131,12 @@ function AutoScroll() {
         };
     }, [stop]);
 
-    useEffect(() => () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); }, []);
+    useEffect(
+        () => () => {
+            if (rafRef.current) cancelAnimationFrame(rafRef.current);
+        },
+        [],
+    );
 
     return (
         <button
@@ -118,7 +168,12 @@ function AutoScroll() {
         >
             {playing ? (
                 <>
-                    <svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor">
+                    <svg
+                        width="10"
+                        height="12"
+                        viewBox="0 0 10 12"
+                        fill="currentColor"
+                    >
                         <rect x="0" y="0" width="3.5" height="12" rx="1" />
                         <rect x="6.5" y="0" width="3.5" height="12" rx="1" />
                     </svg>
@@ -126,7 +181,12 @@ function AutoScroll() {
                 </>
             ) : (
                 <>
-                    <svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor">
+                    <svg
+                        width="10"
+                        height="12"
+                        viewBox="0 0 10 12"
+                        fill="currentColor"
+                    >
                         <polygon points="0,0 10,6 0,12" />
                     </svg>
                     Play
@@ -195,40 +255,56 @@ export default function ScrollyPage() {
 
             <div style={{ backgroundColor: "#FDFCF0" }}>
                 <HeroSection />
-                <IntroSection />
-                <MemoryCaption
-                    eyebrow="White Lake"
-                    heading="Your family's cottage"
-                    body="White Lake has become one of my favourite places in the world. There's something about being there with you that just feels like home."
-                />
+                <div id="zone-intro">
+                    <IntroSection />
+                </div>
+                <div id="zone-caption-1">
+                    <MemoryCaption
+                        eyebrow="White Lake"
+                        heading="Your family's cottage"
+                        body="White Lake has become one of my favourite places in the world. There's something about being there with you that just feels like home."
+                    />
+                </div>
                 <LakeScroll />
-                <MemoryCaption
-                    eyebrow="Formal"
-                    heading={
-                        <>
-                            You always take my <em>breath away</em>
-                        </>
-                    }
-                    body="Getting all dressed up with you is one of my favourite things. No words could describe how beautiful you are."
-                />
+                <div id="zone-caption-2">
+                    <MemoryCaption
+                        eyebrow="Formal"
+                        heading={
+                            <>
+                                You always take my <em>breath away</em>
+                            </>
+                        }
+                        body="Getting all dressed up with you is one of my favourite things. No words could describe how beautiful you are."
+                    />
+                </div>
                 <DancerScroll />
-                <MemoryCaption
-                    eyebrow="Koena, Québec"
-                    heading="Our New Years, Québec adventure"
-                    body="The spa, the food, the cold — I loved every second of that trip because I got to share it with you."
-                />
+                <div id="zone-caption-3">
+                    <MemoryCaption
+                        eyebrow="Koena, Québec"
+                        heading="Our New Years, Québec adventure"
+                        body="The spa, the food, the cold — I loved every second of that trip because I got to share it with you."
+                    />
+                </div>
                 <SpaScroll />
-                <MemoryCaption
-                    eyebrow="Montréal"
-                    heading="Our Montreal trip"
-                    body="Running around Montreal with you was one of the best times. Every street, every bite of food, every moment — I want to go back and do it all again."
-                />
+                <div id="zone-caption-4">
+                    <MemoryCaption
+                        eyebrow="Montréal"
+                        heading="Our Montreal trip"
+                        body="Running around Montreal with you was one of the best times. Every street, every bite of food, every moment — I want to go back and do it all again."
+                    />
+                </div>
                 <MontrealScroll />
                 <SillySection />
                 <SmileSection />
-                <ClosingSection />
-                <QuillSection />
-                <MemoryBookSection />
+                <div id="zone-closing">
+                    <ClosingSection />
+                </div>
+                <div id="zone-quill">
+                    <QuillSection />
+                </div>
+                <div id="zone-memory-book">
+                    <MemoryBookSection />
+                </div>
                 <SpriteDownloadFolder />
             </div>
 

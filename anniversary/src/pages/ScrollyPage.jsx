@@ -100,7 +100,7 @@ export default function ScrollyPage() {
                 />
                 <LakeScroll />
                 <MemoryCaption
-                    eyebrow="the formal"
+                    eyebrow="Formal"
                     heading={<>You always take my <em>breath away</em></>}
                     body="Getting all dressed up with you is one of my favourite things. You walk in and I forget what I was going to say."
                 />

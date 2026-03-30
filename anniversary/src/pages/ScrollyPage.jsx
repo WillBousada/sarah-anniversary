@@ -38,39 +38,22 @@ function ScrollProgress() {
 }
 
 const SPEEDS = { default: 220, text: 50, quill: 25 };
+const TEXT_ZONE_IDS = ["zone-intro","zone-caption-1","zone-caption-2","zone-caption-3","zone-caption-4","zone-closing"];
 
-// Compute speed zones and stop point lazily on first play
-function buildZones() {
-    const zones = [];
-    [
-        "zone-intro",
-        "zone-caption-1",
-        "zone-caption-2",
-        "zone-caption-3",
-        "zone-caption-4",
-        "zone-closing",
-    ].forEach((id) => {
-        const el = document.getElementById(id);
-        if (el)
-            zones.push({
-                top: el.offsetTop,
-                bottom: el.offsetTop + el.offsetHeight,
-                speed: SPEEDS.text,
-            });
-    });
+// Live viewport check — no stale pre-computed positions
+function liveSpeed() {
+    const vh = window.innerHeight;
     const quill = document.getElementById("zone-quill");
-    if (quill)
-        zones.push({
-            top: quill.offsetTop,
-            bottom: quill.offsetTop + quill.offsetHeight,
-            speed: SPEEDS.quill,
-        });
-    return zones;
-}
-
-function speedAt(y, zones) {
-    for (const z of zones) {
-        if (y >= z.top && y < z.bottom) return z.speed;
+    if (quill) {
+        const r = quill.getBoundingClientRect();
+        if (r.top < vh && r.bottom > 0) return SPEEDS.quill;
+    }
+    for (const id of TEXT_ZONE_IDS) {
+        const el = document.getElementById(id);
+        if (el) {
+            const r = el.getBoundingClientRect();
+            if (r.top < vh && r.bottom > 0) return SPEEDS.text;
+        }
     }
     return SPEEDS.default;
 }
@@ -79,8 +62,6 @@ function AutoScroll() {
     const [playing, setPlaying] = useState(false);
     const rafRef = useRef(null);
     const lastTsRef = useRef(null);
-    const zonesRef = useRef(null);
-    const stopYRef = useRef(null);
     const lenisRef = useLenis();
 
     const stop = useCallback(() => {
@@ -92,23 +73,19 @@ function AutoScroll() {
     }, [lenisRef]);
 
     const start = useCallback(() => {
-        // Build zones fresh each play in case layout shifted
-        zonesRef.current = buildZones();
-        const stopEl = document.getElementById("zone-memory-book");
-        stopYRef.current = stopEl ? stopEl.offsetTop : Infinity;
-
         lenisRef?.current?.stop();
         setPlaying(true);
 
         const tick = (ts) => {
             if (lastTsRef.current !== null) {
                 const elapsed = ts - lastTsRef.current;
-                const speed = speedAt(window.scrollY, zonesRef.current);
-                window.scrollBy(0, (elapsed / 1000) * speed);
-                if (window.scrollY >= stopYRef.current) {
+                // Stop when memory book scrolls into view
+                const stopEl = document.getElementById("zone-memory-book");
+                if (stopEl && stopEl.getBoundingClientRect().top <= window.innerHeight) {
                     stop();
                     return;
                 }
+                window.scrollBy(0, (elapsed / 1000) * liveSpeed());
             }
             lastTsRef.current = ts;
             rafRef.current = requestAnimationFrame(tick);

@@ -3,46 +3,18 @@ import BubbleMenu from "./BubbleMenu";
 
 const menuItems = [
     {
-        label: "Hello",
-        href: "#opening",
-        ariaLabel: "Opening",
+        label: "Home",
+        href: "/",
+        ariaLabel: "Home",
         rotation: -8,
         hoverStyles: { bgColor: "#ec4899", textColor: "#ffffff" },
     },
     {
-        label: "One Year",
-        href: "#oneyear",
-        ariaLabel: "One Year",
+        label: "2025",
+        href: "/anniversary-2025",
+        ariaLabel: "Anniversary 2025",
         rotation: 8,
         hoverStyles: { bgColor: "#f472b6", textColor: "#ffffff" },
-    },
-    {
-        label: "Timeline",
-        href: "#timeline",
-        ariaLabel: "Timeline",
-        rotation: -8,
-        hoverStyles: { bgColor: "#fb7185", textColor: "#ffffff" },
-    },
-    {
-        label: "Bee",
-        href: "#bee",
-        ariaLabel: "Bumble Bee",
-        rotation: 8,
-        hoverStyles: { bgColor: "#fbbf24", textColor: "#ffffff" },
-    },
-    {
-        label: "Photos",
-        href: "#gallery",
-        ariaLabel: "Photo Gallery",
-        rotation: -8,
-        hoverStyles: { bgColor: "#f472b6", textColor: "#ffffff" },
-    },
-    {
-        label: "Letter",
-        href: "#letter",
-        ariaLabel: "Love Letter",
-        rotation: 8,
-        hoverStyles: { bgColor: "#ec4899", textColor: "#ffffff" },
     },
     {
         label: "Valentine",

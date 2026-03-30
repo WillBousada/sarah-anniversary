@@ -55,14 +55,19 @@ export default function LakeScroll() {
                         style={{
                             border: `${frameBorder} solid ${frameColor}`,
                             borderRadius: "4px",
+                            // Layered box-shadows simulate a real window frame profile:
+                            // outer wall shadow → outer frame edge → frame bevel → glass reveal
                             boxShadow:
-                                "0 20px 50px rgba(0,0,0,0.3), " +
-                                "inset 0 0 12px rgba(0,0,0,0.12), " +
-                                "0 2px 6px rgba(0,0,0,0.2)",
+                                "0 24px 56px rgba(0,0,0,0.35), " +
+                                "0 2px 8px rgba(0,0,0,0.2), " +
+                                `inset 0 0 0 3px #C8BBAA, ` +
+                                `inset 0 0 0 6px ${frameColor}, ` +
+                                "inset 0 0 0 9px #B8A898, " +
+                                "inset 0 0 0 12px rgba(255,255,255,0.15)",
                             position: "relative",
                         }}
                     >
-                        {/* ── Glass area (sprite + dividers) ── */}
+                        {/* ── Glass area ── */}
                         <div style={{ position: "relative", lineHeight: 0 }}>
                             {/* Sprite */}
                             <div
@@ -76,38 +81,6 @@ export default function LakeScroll() {
                                     filter: "sepia(0.2) contrast(1.1)",
                                     imageRendering: "pixelated",
                                     display: "block",
-                                }}
-                            />
-
-                            {/* Horizontal sash rail — crosses center */}
-                            <div
-                                style={{
-                                    position: "absolute",
-                                    top: "50%",
-                                    left: 0,
-                                    right: 0,
-                                    height: "14px",
-                                    transform: "translateY(-50%)",
-                                    background: frameColor,
-                                    boxShadow:
-                                        "0 2px 4px rgba(0,0,0,0.15), " +
-                                        "0 -1px 3px rgba(0,0,0,0.1)",
-                                }}
-                            />
-
-                            {/* Vertical muntin — crosses center */}
-                            <div
-                                style={{
-                                    position: "absolute",
-                                    top: 0,
-                                    bottom: 0,
-                                    left: "50%",
-                                    width: "10px",
-                                    transform: "translateX(-50%)",
-                                    background: frameColor,
-                                    boxShadow:
-                                        "2px 0 4px rgba(0,0,0,0.1), " +
-                                        "-1px 0 3px rgba(0,0,0,0.08)",
                                 }}
                             />
                         </div>

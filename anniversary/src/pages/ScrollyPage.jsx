@@ -1,6 +1,6 @@
 import SmoothScroll from "../components/scrolly/SmoothScroll";
 import HeroSection from "../components/scrolly/HeroSection";
-import OutdoorsSection from "../components/scrolly/OutdoorsSection";
+import LakeScroll from "../components/scrolly/LakeScroll";
 import DancerScroll from "../components/scrolly/DancerScroll";
 import SpaScroll from "../components/scrolly/SpaScroll";
 import MemoryBookSection from "../components/scrolly/MemoryBookSection";
@@ -14,7 +14,7 @@ export default function ScrollyPage() {
 
             <div style={{ backgroundColor: "#FDFCF0" }}>
                 <HeroSection />
-                <OutdoorsSection />
+                <LakeScroll />
                 <DancerScroll />
                 <SpaScroll />
                 <MemoryBookSection />

@@ -37,13 +37,14 @@ function ScrollProgress() {
     );
 }
 
-const SCROLL_SPEED = 180;
+const SCROLL_SPEED = 90; // pixels per second
 
 function AutoScroll() {
     const [playing, setPlaying] = useState(false);
     const activeRef = useRef(false);
     const lastTsRef = useRef(null);
     const lenisRef = useLenis();
+    const buttonRef = useRef(null);
 
     const stop = useCallback(() => {
         activeRef.current = false;
@@ -63,7 +64,10 @@ function AutoScroll() {
             if (lastTsRef.current !== null) {
                 const delta = ((ts - lastTsRef.current) / 1000) * SCROLL_SPEED;
                 window.scrollBy(0, delta);
-                if (window.scrollY + window.innerHeight >= document.body.scrollHeight - 5) {
+                if (
+                    window.scrollY + window.innerHeight >=
+                    document.body.scrollHeight - 5
+                ) {
                     stop();
                     return;
                 }
@@ -76,8 +80,9 @@ function AutoScroll() {
 
     // Pause on any manual scroll input
     useEffect(() => {
-        const onInteract = () => {
-            if (rafRef.current) stop();
+        const onInteract = (e) => {
+            if (buttonRef.current?.contains(e.target)) return;
+            if (activeRef.current) stop();
         };
         window.addEventListener("wheel", onInteract, { passive: true });
         window.addEventListener("touchstart", onInteract, { passive: true });
@@ -89,15 +94,33 @@ function AutoScroll() {
         };
     }, [stop]);
 
+    // Auto-pause once when quill section first comes into view
+    useEffect(() => {
+        const el = document.getElementById("zone-quill");
+        if (!el) return;
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting && activeRef.current) {
+                    stop();
+                    observer.disconnect();
+                }
+            },
+            { threshold: 0.15 },
+        );
+        observer.observe(el);
+        return () => observer.disconnect();
+    }, [stop]);
+
     useEffect(
         () => () => {
-            if (rafRef.current) cancelAnimationFrame(rafRef.current);
+            activeRef.current = false;
         },
         [],
     );
 
     return (
         <button
+            ref={buttonRef}
             onClick={() => (playing ? stop() : start())}
             aria-label={playing ? "Pause auto-scroll" : "Start auto-scroll"}
             title={playing ? "Pause" : "Auto-scroll through the page"}

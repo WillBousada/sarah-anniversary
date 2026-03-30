@@ -16,7 +16,6 @@ export default function SmileSection() {
         <section
             ref={ref}
             className="relative h-screen overflow-hidden flex items-end justify-start bg-black"
-            style={{ scrollSnapAlign: "start" }}
         >
             <motion.div className="absolute inset-0" style={{ scale, y }}>
                 <img

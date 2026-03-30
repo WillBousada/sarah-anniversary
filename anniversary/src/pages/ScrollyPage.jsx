@@ -37,26 +37,7 @@ function ScrollProgress() {
     );
 }
 
-const SPEEDS = { default: 220, text: 50, quill: 25 };
-const TEXT_ZONE_IDS = ["zone-intro","zone-caption-1","zone-caption-2","zone-caption-3","zone-caption-4","zone-closing"];
-
-// Live viewport check — no stale pre-computed positions
-function liveSpeed() {
-    const vh = window.innerHeight;
-    const quill = document.getElementById("zone-quill");
-    if (quill) {
-        const r = quill.getBoundingClientRect();
-        if (r.top < vh && r.bottom > 0) return SPEEDS.quill;
-    }
-    for (const id of TEXT_ZONE_IDS) {
-        const el = document.getElementById(id);
-        if (el) {
-            const r = el.getBoundingClientRect();
-            if (r.top < vh && r.bottom > 0) return SPEEDS.text;
-        }
-    }
-    return SPEEDS.default;
-}
+const SCROLL_SPEED = 220;
 
 function AutoScroll() {
     const [playing, setPlaying] = useState(false);
@@ -78,14 +59,12 @@ function AutoScroll() {
 
         const tick = (ts) => {
             if (lastTsRef.current !== null) {
-                const elapsed = ts - lastTsRef.current;
-                // Stop when memory book scrolls into view
-                const stopEl = document.getElementById("zone-memory-book");
-                if (stopEl && stopEl.getBoundingClientRect().top <= window.innerHeight) {
+                const delta = ((ts - lastTsRef.current) / 1000) * SCROLL_SPEED;
+                window.scrollBy(0, delta);
+                if (window.scrollY + window.innerHeight >= document.body.scrollHeight - 5) {
                     stop();
                     return;
                 }
-                window.scrollBy(0, (elapsed / 1000) * liveSpeed());
             }
             lastTsRef.current = ts;
             rafRef.current = requestAnimationFrame(tick);

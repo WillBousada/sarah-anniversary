@@ -7,6 +7,7 @@ import DancerScroll from "../components/scrolly/DancerScroll";
 import SpaScroll from "../components/scrolly/SpaScroll";
 import MemoryBookSection from "../components/scrolly/MemoryBookSection";
 import RevealSection from "../components/scrolly/RevealSection";
+import ClosingSection from "../components/scrolly/ClosingSection";
 
 function BackToTop() {
     const [visible, setVisible] = useState(false);
@@ -72,6 +73,7 @@ export default function ScrollyPage() {
                 <SpaScroll />
                 <MemoryBookSection />
                 <RevealSection />
+                <ClosingSection />
             </div>
 
             <BackToTop />

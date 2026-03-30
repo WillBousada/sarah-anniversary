@@ -1,15 +1,14 @@
 import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
-// 2 columns × 4 rows = 8 slots, 7 active frames
+// 3 columns × 2 rows = 6 frames
 const FRAMES = [
     "0% 0%",
+    "50% 0%",
     "100% 0%",
-    "0% 33.33%",
-    "100% 33.33%",
-    "0% 66.67%",
-    "100% 66.67%",
     "0% 100%",
+    "50% 100%",
+    "100% 100%",
 ];
 
 export default function SpaScroll() {
@@ -21,12 +20,12 @@ export default function SpaScroll() {
         offset: ["start start", "end end"],
     });
 
-    // Map 0–1 scroll to 0–6 frame index, snap to integer
-    const frameProgress = useTransform(scrollYProgress, [0, 1], [0, 6]);
+    // Map 0–1 scroll to 0–5 frame index, snap to integer
+    const frameProgress = useTransform(scrollYProgress, [0, 1], [0, 5]);
 
     useEffect(() => {
         const unsubscribe = frameProgress.on("change", (v) => {
-            setFrame(Math.round(Math.min(6, Math.max(0, v))));
+            setFrame(Math.round(Math.min(5, Math.max(0, v))));
         });
         return unsubscribe;
     }, [frameProgress]);
@@ -38,10 +37,7 @@ export default function SpaScroll() {
     const spriteSize = "clamp(240px, 45vmin, 400px)";
 
     return (
-        <section
-            ref={ref}
-            className="relative min-h-[300vh]"
-        >
+        <section ref={ref} className="relative min-h-[300vh]">
             {/* Sticky viewport */}
             <div className="sticky top-0 h-screen flex flex-col items-center justify-center gap-8 overflow-hidden">
                 <p
@@ -58,7 +54,8 @@ export default function SpaScroll() {
                     {/* ── Vintage TV outer body ── */}
                     <div
                         style={{
-                            background: "linear-gradient(160deg, #3a3a3a 0%, #2a2a2a 60%, #1e1e1e 100%)",
+                            background:
+                                "linear-gradient(160deg, #3a3a3a 0%, #2a2a2a 60%, #1e1e1e 100%)",
                             borderRadius: "28px",
                             padding: "22px 26px 18px 26px",
                             boxShadow:
@@ -84,8 +81,9 @@ export default function SpaScroll() {
                                     style={{
                                         width: spriteSize,
                                         height: spriteSize,
-                                        backgroundImage: "url('/assets/spa-sprite.webp')",
-                                        backgroundSize: "200% 400%",
+                                        backgroundImage:
+                                            "url('/assets/spa-sprite.png')",
+                                        backgroundSize: "300% 200%",
                                         backgroundPosition: FRAMES[frame],
                                         backgroundRepeat: "no-repeat",
                                         filter: "sepia(0.2) contrast(1.1)",

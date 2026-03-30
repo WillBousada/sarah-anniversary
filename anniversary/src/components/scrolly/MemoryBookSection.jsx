@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from "react";
-import { motion, useScroll, useTransform, useMotionValue } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 const IMAGES = [
     "/assets/IMG_1099.jpg",
@@ -27,58 +27,80 @@ const SPINE_W = 22;
 const leatherBg =
     "linear-gradient(135deg, #3d1a08 0%, #5c2a10 30%, #3d1a08 60%, #4a2010 100%)";
 
+// Matte page — no gloss inset shadow
 const pageStyle = {
-    background: "#f5f0e0",
-    boxShadow: "inset 0 0 12px rgba(0,0,0,0.15)",
+    background: "#f8f6f1",
     overflow: "hidden",
     position: "relative",
     height: "100%",
 };
 
-const photoStyle = {
+// Printed photo: equal white border, slightly wider at bottom like a developed print
+const photoWrapStyle = {
+    width: "100%",
+    height: "100%",
+    boxSizing: "border-box",
+    padding: "10px 10px 20px 10px",
+    background: "#fefefe",
+    display: "flex",
+    alignItems: "stretch",
+};
+
+// Early-2000s print: warm, slightly faded, low saturation
+const photoImgStyle = {
     width: "100%",
     height: "100%",
     objectFit: "cover",
-    padding: "8px",
-    boxSizing: "border-box",
+    display: "block",
+    filter: "sepia(0.2) saturate(0.82) contrast(1.05) brightness(1.03) hue-rotate(8deg)",
 };
+
+function PrintedPhoto({ src, alt }) {
+    return (
+        <div style={photoWrapStyle}>
+            <img src={src} alt={alt} style={photoImgStyle} />
+        </div>
+    );
+}
 
 export default function MemoryBookSection() {
     const ref = useRef(null);
     const [currentPage, setCurrentPage] = useState(0);
-    const rotateY = useMotionValue(0);
 
     const { scrollYProgress } = useScroll({
         target: ref,
         offset: ["start start", "end end"],
     });
 
-    // 0→1 scroll maps to 0→(N-1) float
-    const pageProgress = useTransform(
+    // Monotonically increasing total rotation: 0 → (N-1)*180
+    // Each 180° = one page flip. Never resets, so no snap glitch.
+    const totalRotation = useTransform(
         scrollYProgress,
         [0, 1],
-        [0, IMAGES.length - 1]
+        [0, (IMAGES.length - 1) * 180]
+    );
+
+    // flipAngle: 0 → -180 per page, then snaps to 0 at boundary.
+    // The snap happens exactly when the page is edge-on (-180°) — invisible.
+    const flipAngle = useTransform(totalRotation, (v) => -(v % 180));
+
+    // Page lift shadow peaks when page is vertical (90°)
+    const flipShadow = useTransform(
+        flipAngle,
+        [0, -90, -180],
+        [
+            "0 1px 4px rgba(0,0,0,0.12)",
+            "6px 0 24px rgba(0,0,0,0.38)",
+            "0 1px 4px rgba(0,0,0,0.12)",
+        ]
     );
 
     useEffect(() => {
-        return pageProgress.on("change", (v) => {
-            const page = Math.min(Math.floor(v), IMAGES.length - 2);
-            const angle = (v % 1) * 180;
+        return totalRotation.on("change", (v) => {
+            const page = Math.min(Math.floor(v / 180), IMAGES.length - 2);
             setCurrentPage((prev) => (prev !== page ? page : prev));
-            rotateY.set(angle);
         });
-    }, [pageProgress, rotateY]);
-
-    // Page lift shadow: flat → tall at 90° → flat again
-    const flipShadow = useTransform(
-        rotateY,
-        [0, 90, 180],
-        [
-            "0 2px 8px rgba(0,0,0,0.2)",
-            "8px 0 30px rgba(0,0,0,0.5)",
-            "0 2px 8px rgba(0,0,0,0.2)",
-        ]
-    );
+    }, [totalRotation]);
 
     const sectionOpacity = useTransform(scrollYProgress, [0.97, 1], [1, 0]);
 
@@ -108,7 +130,7 @@ export default function MemoryBookSection() {
                             background: leatherBg,
                             borderRadius: "3px 8px 8px 3px",
                             boxShadow:
-                                "0 30px 80px rgba(0,0,0,0.6), 0 8px 20px rgba(0,0,0,0.4)",
+                                "0 18px 50px rgba(0,0,0,0.45), 0 4px 12px rgba(0,0,0,0.3)",
                             padding: "16px",
                             display: "flex",
                             gap: 0,
@@ -124,11 +146,7 @@ export default function MemoryBookSection() {
                             }}
                         >
                             {leftImg ? (
-                                <img
-                                    src={leftImg}
-                                    alt={`Memory ${currentPage}`}
-                                    style={photoStyle}
-                                />
+                                <PrintedPhoto src={leftImg} alt={`Memory ${currentPage}`} />
                             ) : (
                                 <div
                                     style={{
@@ -202,11 +220,7 @@ export default function MemoryBookSection() {
                                     borderRadius: "0 2px 2px 0",
                                 }}
                             >
-                                <img
-                                    src={behindImg}
-                                    alt={`Memory ${currentPage + 2}`}
-                                    style={photoStyle}
-                                />
+                                <PrintedPhoto src={behindImg} alt={`Memory ${currentPage + 2}`} />
                             </div>
 
                             {/* Flipping layer (z-index 1) */}
@@ -217,7 +231,7 @@ export default function MemoryBookSection() {
                                     zIndex: 1,
                                     transformStyle: "preserve-3d",
                                     transformOrigin: "left center",
-                                    rotateY: useTransform(rotateY, (v) => -v),
+                                    rotateY: flipAngle,
                                     boxShadow: flipShadow,
                                 }}
                             >
@@ -231,11 +245,7 @@ export default function MemoryBookSection() {
                                         borderRadius: "0 2px 2px 0",
                                     }}
                                 >
-                                    <img
-                                        src={frontImg}
-                                        alt={`Memory ${currentPage + 1}`}
-                                        style={photoStyle}
-                                    />
+                                    <PrintedPhoto src={frontImg} alt={`Memory ${currentPage + 1}`} />
                                 </div>
 
                                 {/* Back face: mirrored so it reads correctly when face-down */}
@@ -249,11 +259,7 @@ export default function MemoryBookSection() {
                                         borderRadius: "0 2px 2px 0",
                                     }}
                                 >
-                                    <img
-                                        src={behindImg}
-                                        alt={`Memory ${currentPage + 2}`}
-                                        style={photoStyle}
-                                    />
+                                    <PrintedPhoto src={behindImg} alt={`Memory ${currentPage + 2}`} />
                                 </div>
                             </motion.div>
                         </div>

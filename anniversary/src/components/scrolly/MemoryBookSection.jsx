@@ -110,7 +110,7 @@ export default function MemoryBookSection() {
         });
     }, [totalRotation]);
 
-    const sectionOpacity = useTransform(scrollYProgress, [0.97, 1], [1, 0]);
+    const sectionOpacity = useTransform(scrollYProgress, [0.99, 1], [1, 0]);
 
     const leftImg = currentPage > 0 ? IMAGES[currentPage - 1] : null;
     const frontImg = IMAGES[currentPage];

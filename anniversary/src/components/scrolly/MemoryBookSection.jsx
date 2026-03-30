@@ -11,11 +11,19 @@ const IMAGES = [
     "/assets/IMG_2755.jpeg",
     "/assets/IMG_2780.JPG",
     "/assets/IMG_2822.JPG",
+    "/assets/IMG_2833.jpg",
+    "/assets/IMG_2837.jpg",
+    "/assets/IMG_2844.jpg",
+    "/assets/IMG_2852.jpg",
+    "/assets/IMG_2863.jpg",
+    "/assets/IMG_2865.jpg",
     "/assets/IMG_2886.jpg",
     "/assets/IMG_2930.jpg",
     "/assets/IMG_3017.jpg",
     "/assets/IMG_3021.jpg",
     "/assets/IMG_3028.jpg",
+    "/assets/IMG_3167.jpg",
+    "/assets/IMG_4440.jpg",
     "/assets/IMG_7690.jpeg",
     "/assets/IMG_2052.jpeg",
 ];
@@ -109,7 +117,7 @@ export default function MemoryBookSection() {
     const behindImg = IMAGES[Math.min(currentPage + 1, IMAGES.length - 1)];
 
     return (
-        <section ref={ref} className="relative min-h-[1500vh]">
+        <section ref={ref} className="relative min-h-[2300vh]">
             <div className="sticky top-0 h-screen flex flex-col items-center justify-center gap-6 overflow-hidden">
                 <motion.div
                     style={{ opacity: sectionOpacity }}

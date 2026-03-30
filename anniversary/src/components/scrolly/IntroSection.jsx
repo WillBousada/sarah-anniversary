@@ -49,7 +49,7 @@ export default function IntroSection() {
                     className="text-stone-400 text-sm md:text-base leading-relaxed"
                     style={{ fontFamily: "'Georgia', serif" }}
                 >
-                    All you have to do is scroll.{" "}
+                    All you have to do is press play or scroll. Feel free to pause anytime!'{" "}
                     <span style={{ fontSize: "1.1em" }}>&#10084;&#65039;</span>
                 </p>
 

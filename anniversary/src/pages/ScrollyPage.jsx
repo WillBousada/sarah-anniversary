@@ -105,7 +105,7 @@ function AutoScroll() {
                     observer.disconnect();
                 }
             },
-            { threshold: 0.15 },
+            { threshold: 0.95 },
         );
         observer.observe(el);
         return () => observer.disconnect();

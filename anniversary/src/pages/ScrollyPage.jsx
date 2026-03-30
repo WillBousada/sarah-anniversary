@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import SmoothScroll from "../components/scrolly/SmoothScroll";
 import HeroSection from "../components/scrolly/HeroSection";
+import IntroSection from "../components/scrolly/IntroSection";
 import LakeScroll from "../components/scrolly/LakeScroll";
 import DancerScroll from "../components/scrolly/DancerScroll";
 import SpaScroll from "../components/scrolly/SpaScroll";
@@ -65,6 +66,7 @@ export default function ScrollyPage() {
 
             <div style={{ backgroundColor: "#FDFCF0" }}>
                 <HeroSection />
+                <IntroSection />
                 <LakeScroll />
                 <DancerScroll />
                 <SpaScroll />

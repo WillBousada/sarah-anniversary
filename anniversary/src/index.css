@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+html {
+  scroll-snap-type: y proximity;
+}
+
 /* Film grain overlay */
 .grain-overlay {
   position: fixed;

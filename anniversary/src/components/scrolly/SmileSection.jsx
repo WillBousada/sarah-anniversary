@@ -16,6 +16,7 @@ export default function SmileSection() {
         <section
             ref={ref}
             className="relative h-screen overflow-hidden flex items-end justify-start"
+            style={{ scrollSnapAlign: "start" }}
         >
             <motion.div className="absolute inset-0" style={{ scale, y }}>
                 <img
@@ -31,7 +32,7 @@ export default function SmileSection() {
                 style={{ opacity }}
             >
                 <p
-                    className="text-white/60 text-sm tracking-[0.3em] uppercase mb-3"
+                    className="text-white text-sm tracking-[0.3em] uppercase mb-3"
                     style={{ fontFamily: "'Georgia', serif" }}
                 >
                     always

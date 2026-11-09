@@ -23,6 +23,13 @@ const menuItems = [
         rotation: -8,
         hoverStyles: { bgColor: "#e11d48", textColor: "#ffffff" },
     },
+    {
+        label: "2026",
+        href: "/anniversary-2026",
+        ariaLabel: "Anniversary 2026 Menu",
+        rotation: 8,
+        hoverStyles: { bgColor: "#9ca3af", textColor: "#ffffff" },
+    },
 ];
 
 export default function Layout() {

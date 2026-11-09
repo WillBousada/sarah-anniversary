@@ -1,0 +1,377 @@
+/* Osteria di Souba — anniversary menu
+   Layout modeled on a classic Italian restaurant menu: centered section
+   headings, uppercase dish names, dotted leaders to plain prices. */
+
+.osteria {
+  --bg: #fafafa;
+  --ink: #1f2937;
+  --muted: #6b7280;
+  --faint: #9ca3af;
+  --silver: #c4c9d1;
+  --silver-border: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 50%, #9ca3af 100%);
+  --platinum: #f3f4f6;
+  --silver-hi: #e2e8f0;
+
+  --display: "Cormorant Garamond", Georgia, serif;
+  --body: "EB Garamond", Georgia, serif;
+  --ui: Inter, system-ui, sans-serif;
+
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--body);
+  padding: 0;
+}
+
+/* ---------- Photo hero ---------- */
+.osteria-hero {
+  position: relative;
+  min-height: max(50svh, 420px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #1c1f24;
+}
+.osteria-hero-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 75% center;
+}
+.osteria-hero-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(17, 24, 39, 0.82), rgba(17, 24, 39, 0.35));
+}
+.osteria-hero .osteria-header {
+  position: relative;
+  z-index: 1;
+  padding: 7.5rem 1.5rem 3rem;
+  color: #ffffff;
+  animation: osteria-rise 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes osteria-rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
+}
+.osteria-subtitle-sep {
+  display: none;
+}
+.osteria-subtitle-line {
+  display: block;
+}
+@media (min-width: 640px) {
+  .osteria-hero .osteria-header {
+    padding-top: 6rem;
+  }
+  .osteria-subtitle-sep {
+    display: inline;
+  }
+  .osteria-subtitle-line {
+    display: inline;
+  }
+}
+.osteria-hero .osteria-tagline,
+.osteria-hero .osteria-subtitle {
+  color: rgba(255, 255, 255, 0.82);
+}
+.osteria-hero .osteria-monogram {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+}
+
+/* ---------- Monogram badge ---------- */
+.osteria-monogram {
+  width: 4.25rem;
+  height: 4.25rem;
+  margin: 0 auto 1.75rem;
+  border-radius: 9999px;
+  padding: 1.5px;
+  background: var(--silver-border);
+}
+.osteria-monogram span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 9999px;
+  background: radial-gradient(circle at 30% 25%, #ffffff 0%, var(--platinum) 60%, var(--silver-hi) 100%);
+  font-family: var(--display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #4b5563;
+}
+.osteria-monogram--small {
+  flex: 0 0 auto;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: 0;
+}
+.osteria-monogram--small span {
+  font-size: 0.78rem;
+}
+
+/* ---------- Header ---------- */
+.osteria-header {
+  text-align: center;
+  padding: 0 1.5rem;
+}
+.osteria-title {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(2.25rem, 10vw, 4.5rem);
+  line-height: 1.05;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.osteria-tagline {
+  margin: 0.9rem 0 0;
+  font-family: var(--ui);
+  font-size: 0.75rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.osteria-subtitle {
+  margin: 1.25rem 0 0;
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--muted);
+}
+
+/* ---------- Section links ---------- */
+.osteria-nav {
+  border-top: 1px solid var(--silver-hi);
+  border-bottom: 1px solid var(--silver-hi);
+}
+.osteria-nav ul {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.25rem 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0.9rem 1rem;
+}
+.osteria-nav a {
+  display: block;
+  padding: 0.35rem 0;
+  font-family: var(--ui);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.osteria-nav a:hover,
+.osteria-nav a:focus-visible {
+  color: var(--ink);
+}
+
+/* ---------- Sheet & sections ---------- */
+.osteria-sheet {
+  max-width: 50rem;
+  margin: 0 auto;
+  padding: 4rem 1.5rem 0;
+}
+.osteria-section {
+  scroll-margin-top: 6.5rem;
+}
+.osteria-section + .osteria-section {
+  margin-top: 6rem;
+}
+.osteria-section-head {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.osteria-section-head h2 {
+  margin: 0 0 0.4rem;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(1.9rem, 6vw, 2.5rem);
+}
+.osteria-section-head p {
+  margin: 0;
+  font-family: var(--ui);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.osteria-rule {
+  border: 0;
+  height: 1px;
+  width: 80px;
+  margin: 1.5rem auto 0;
+  background: linear-gradient(90deg, #d1d5db, #9ca3af, #d1d5db);
+}
+
+/* ---------- Items ---------- */
+.osteria-items {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+.osteria-item-line {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 0.4rem;
+}
+.osteria-item h3 {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.375rem;
+  line-height: 1.25;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.osteria-leader {
+  display: none;
+}
+.osteria-price {
+  font-family: var(--ui);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+.osteria-price s {
+  color: var(--faint);
+  margin-right: 0.6rem;
+  font-weight: 400;
+}
+.osteria-price em {
+  font-family: var(--body);
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+}
+.osteria-item > p {
+  margin: 0;
+  font-size: 1.1rem;
+  line-height: 1.55;
+  color: rgba(31, 41, 55, 0.8);
+}
+
+/* Sold-out dishes recede so tonight's dish leads each section */
+.osteria-item.is-sold-out h3,
+.osteria-item.is-sold-out > p {
+  color: var(--faint);
+}
+
+@media (min-width: 640px) {
+  .osteria-item-line {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 1rem;
+  }
+  .osteria-leader {
+    display: block;
+    flex: 1 1 auto;
+    min-width: 1.5rem;
+    border-bottom: 2px dotted var(--silver);
+    position: relative;
+    top: -6px;
+  }
+  .osteria-item > p {
+    padding-right: 6rem;
+  }
+}
+
+/* ---------- House notes ---------- */
+.osteria-notes {
+  margin: 6rem 0 0;
+  padding: 2rem 1.5rem;
+  border: 1px solid var(--silver-hi);
+  background: rgba(243, 244, 246, 0.5);
+  text-align: center;
+}
+.osteria-notes p {
+  margin: 0;
+  font-style: italic;
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: rgba(31, 41, 55, 0.8);
+}
+
+/* ---------- Sign-off ---------- */
+.osteria-signoff {
+  margin: 4rem 0 0;
+  text-align: center;
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 1.6rem;
+  color: var(--muted);
+}
+
+/* ---------- Footer ---------- */
+.osteria-footer {
+  position: relative;
+  margin-top: 5rem;
+  padding: 3.5rem 1.5rem calc(3rem + env(safe-area-inset-bottom));
+  background: linear-gradient(180deg, var(--bg) 0%, var(--platinum) 100%);
+  text-align: center;
+}
+.osteria-footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(32rem, calc(100% - 3rem));
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, #d1d5db 20%, #9ca3af 50%, #d1d5db 80%, transparent 100%);
+}
+.osteria-footer-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+}
+.osteria-footer p {
+  margin: 0;
+}
+.osteria-footer-main {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 1.35rem;
+  line-height: 1.3;
+  color: var(--ink);
+}
+.osteria-footer-sub {
+  font-family: var(--ui);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  line-height: 1.8;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ---------- Fade-in ---------- */
+.osteria-reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.osteria-reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .osteria-hero .osteria-header {
+    animation: none;
+  }
+  .osteria-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
